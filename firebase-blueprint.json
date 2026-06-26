@@ -1,0 +1,51 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile document representing real estate platform participants.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique user ID matching request.auth.uid"
+        },
+        "email": {
+          "type": "string",
+          "description": "User email address"
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the user"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["buyer", "seller", "admin"],
+          "description": "Access control role on the platform"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Optional contact phone number"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Optional company/agency name for sellers"
+        },
+        "avatarUrl": {
+          "type": "string",
+          "description": "Optional avatar image URL"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of account creation"
+        }
+      },
+      "required": ["id", "email", "name", "role", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile collection holding role and personal identifiers, protected by zero-trust owner checks."
+    }
+  }
+}
